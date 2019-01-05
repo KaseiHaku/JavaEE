@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    name=<input id="name" type="text"/><br/>
+    age=<input id="age" type="text"/><br/>
+    files=<input id="files" type="file" multiple="multiple"/><br/>
+    <input id="submit" type="button" value="submit"/>
+    <script>
+        //################################################ Global Variable ###############################################################
+
+        //################################################ Global Function ###############################################################
+        // 带有普通参数的文件上传
+        function uploadWithParam() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var files = document.getElementById("files").files;
+            console.log(files);
+
+            var formData = new FormData();
+            formData.append("name", name);
+            formData.append("age", age);
+            for(var i=0; i<files.length; i++){
+                formData.append("fileAry",files[i]);
+            }
+
+            // 发送原生 ajax
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(this.readyState === 4){
+                    if(this.status === 200){
+                        console.log(this.responseText);
+                    } else{
+                        console.log("Error: "+ this.status); // 在此次请求中发生的错误
+                    }
+                }
+            };
+            xhr.open("post", "/genesisweb/servlet/UploadServlet", true);
+            // post 可以发送的编码方式：
+            // application/x-www-form-urlencoded (default)
+            // multipart/form-data (带文件)
+            // text/plain (纯字符串，即序列化的字符数据)
+            xhr.setRequestHeader("Content-type", "multipart/form-data");
+            xhr.send(formData); // 直接放 formData 实例
+        }
+        //################################################ Event Code ####################################################################
+        document.getElementById("submit").onclick = uploadWithParam;
+
+        //################################################ Automatic Execution Code ######################################################
+        //############## During Loading ########################
+
+        //############## After Loading #########################
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>原生 Ajax 的使用</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+    name=<input id="name" type="text"/><br/>
+    age=<input id="age" type="text"/><br/>
+    <input id="ajaxPost" type="button" value="post"/><input id="ajaxGet" type="button" value="get"/><br/>
+
+    <script language="JavaScript">
+        //################################################ Global Variable ###############################################################
+
+        //################################################ Global Function ###############################################################
+        function nativeAjaxPost(){
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+
+            var xhr = new XMLHttpRequest(); // 创建一个 http 请求实例
+            xhr.onreadystatechange = function() {  // 配置回调函数
+                if(this.readyState === 4){ // readyState 4 代表已向服务器发送请求
+                    if(this.status === 200){ // status 200 代表服务器返回成功
+                        console.log(this.responseText); // 如果返回数据是 String 格式的，那么用这个属性取数据
+                        this.responseXML; // 如果返回数据是 xml 格式的，那么用这个属性取数据
+                    } else{
+                        console.log("Error: "+ this.status); // 在此次请求中发生的错误
+                    }
+                }
+            }
+            xhr.open("post", "/genesisweb/servlet/AjaxServlet", true); // 设置 请求类型、请求 url 地址、是否异步
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); //告知服务器 send 方法中带参数，且参数类型为 application/x-www-form-urlencoded
+            xhr.send("name="+name+"&age="+age); // post 请求参数
+        }
+
+
+        function nativeAjaxGet(){
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4){
+                    if(this.status === 200){
+                        console.log(this.responseText);
+                        this.responseXML;
+                    } else{
+                        console.log("Error: "+ this.status);
+                    }
+                }
+            }
+            xhr.open("get", "/genesisweb/servlet/AjaxServlet?name="+name+"&age="+age, true); // 设置 请求类型、请求 url 地址、请求参数、是否异步
+            xhr.send(); // get 请求不带参数
+        }
+
+        //################################################ Event Code ####################################################################
+        document.getElementById("ajaxPost").onclick = nativeAjaxPost;
+        document.getElementById("ajaxGet").onclick = nativeAjaxGet;
+        //################################################ Automatic Execution Code ######################################################
+        //############## During Loading ########################
+
+        //############## After Loading #########################
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web 项目开发原则</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <h1>Web 项目开发原则</h1>
+    <pre>
+        1. 完全前后端分离，前端通过 ajax 请求数据，前端控制页面跳转，禁止后端进行页面跳转操作（除非像支付宝等特例）
+        2. 前端页面跳转流程：前端发起页面跳转请求到 Server 端 - Sever 端判断权限是否允许跳转返回标志给前端 - 前端根据标志决定是否跳转
+        3. 前端页面之间传递参数：通过 URL 带参数；通过本地存储 Cookie
+        4. 前后端分离最重要的事情，防止伪造请求；即权限验证逻辑完全放在后端
+        5. 业务逻辑原子化，不要多个业务逻辑或功能掺和在一起
+    </pre>
+</body>
+</html>

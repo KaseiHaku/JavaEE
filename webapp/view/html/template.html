@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="javascript" src="../../resource/js/utility/UrlUtil.js"></script>
+    <script type="javascript" src="../../resource/frame/JQuery/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+<div>
+
+
+    <input type="text" id="url">
+    <input type="text" id="name">
+    <input type="text" id="modifier">
+    <button type="button" onclick="gg();">execute</button>
+
+</div>
+<script>
+    //################################################ Global Variable ###############################################################
+
+    //################################################ Global Function ###############################################################
+    function gg(){
+        var urlUtil = new UrlUtil();
+        var ary =  urlUtil.getUrlParamByName($('#url').val(), $('#name').val(), $('#modifier').val());
+        console.log(ary);
+    }
+    //################################################ Event Code ####################################################################
+
+    //################################################ Automatic Execution Code ######################################################
+    //############## During Loading ########################
+
+    //############## After Loading #########################
+
+
+
+</script>
+</body>
+</html>

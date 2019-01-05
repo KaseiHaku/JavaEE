@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <!--######################################## Context Parameter ##################################################-->
+    <context-param>
+        <param-name>context_param_name</param-name>
+        <param-value>context_param_value</param-value>
+    </context-param>
+
+
+
+    <!--######################################## Listener Settings ##################################################-->
+    <listener>
+        <listener-class>kasei.genesisweb.listener.MyServletContextListener</listener-class>
+    </listener>
+
+
+
+    <!--######################################## Filter Settings ####################################################-->
+    <filter>
+        <filter-name>PostCharacterEncodingFilter</filter-name>
+        <filter-class>kasei.web.filter.PostCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PostCharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter><!--自定义编码过滤器：用于过滤 get 请求-->
+        <filter-name>EncoidingFilter</filter-name>
+        <filter-class>kasei.web.filter.GetCharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncoidingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--######################################## Servlet Settings ###################################################-->
+    <servlet>
+        <servlet-name>FirstServlet</servlet-name>
+        <servlet-class>kasei.genesisweb.servlet.FirstServlet</servlet-class>   <!--Servlet的类-->
+        <init-param>                                     <!--初始化一个变量，可看成全局变量，可省略-->
+            <param-name>param_name</param-name>              <!--变量名称-->
+            <param-value>param_value</param-value>              <!--变量值-->
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FirstServlet</servlet-name>
+        <url-pattern>/servlet/FirstServlet</url-pattern>                   <!--映射的url路径 -->
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjaxServlet</servlet-name>
+        <servlet-class>kasei.genesisweb.servlet.AjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjaxServlet</servlet-name>
+        <url-pattern>/servlet/AjaxServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>kasei.genesisweb.servlet.DownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/servlet/DownloadServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>kasei.genesisweb.servlet.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/servlet/UploadServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!--######################################## Session Settings ###################################################-->
+    <session-config>
+        <session-timeout>60</session-timeout><!-- 设置 session 过期时间为 60 分钟 -->
+    </session-config>
+
+    <!--######################################## Welcome Settings ###################################################-->
+    <welcome-file-list>
+        <welcome-file>./view/jsp/index.jsp</welcome-file>
+        <welcome-file>./view/jsp/index.html</welcome-file>
+    </welcome-file-list>
+
+    <!--######################################## Error And Exception Settings #######################################-->
+    <!--
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/except.jsp</location>
+    </error-page>
+     -->
+</web-app>

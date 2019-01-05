@@ -1,0 +1,69 @@
+└  ─  ├ │
+├─
+└─
+
+1. Browser 向后台提交数据的方法
+    1. URL 方式：包括 <a> 标签，该方式只能是 get 方法
+    2. <form> 方式： get post put delete 方法都可能
+    3. ajax 方式：get post put delete 方法都有可能，但是服务器只能返回 字符串格式的数据，不接收 文件 类型
+
+2. 前端页面间（不经过后台）传递数据的方法
+    1. URL 携带参数
+    2. Cookie 保存参数
+    3. LocalStorage 保存参数
+    
+3. Request Header
+    Accept:                             // 表示客户端可接受的 MIME 文件类型，跟返回头中的 Content-Type 对应
+    Accept-Charset                      // 表明客户端可接受的 字符集类型，跟返回头中 Content-Type 中的字符集对应
+    Accept-Encoding: gzip               // 表示客户端支持的压缩算法有 gzip 等，跟返回头中的 Content-Encoding 对应
+    Accept-Ranges:
+    Accept-Language:
+    Cookie：
+    User-Agent: 
+
+4. Response Header
+    Content-Type: text/html; charset=utf-8     // 表示服务器返回给前端的内容的类型
+    Content-Disposition: attachment; filename="filename.jpg"  // 表示下载内容的展示方式，用于文件下载
+    Content-Encoding: gzip  // 表示服务器端返回的正文内容是经过压缩的，且压缩算法为 gzip，如果返回内容没有经过压缩，则该头部不存在
+    Content-Length: 100 // 表示正文长度，单位 byte 
+    Content-Language: // 表示服务器传递的语言
+    Content-Range：
+    Set-Cookie：
+    Location: // 重定向地址
+
+
+
+
+
+
+
+JavaWeb项目目录结构：
+JavaWeb
+   └─ WebContent
+      ├─ MEATA-INF
+      ├─ WEB-INF      该目录client端不能访问，只能在service端访问，客户端想要访问需要在web.xml中做映射处理，如servlet配置
+      │    ├─ classes     该文件夹 == src文件夹，存放src文件夹中编写的java程序编译后的.class文件
+      │    ├─ lib         存放web项目中要用到的jar包，最好所有的jar包都放在这里，放在其他地方可能会ClassNotFund，且不能在lib目录下建子目录
+      │    └─ web.xml     web项目的配置文件
+      └─ otherFiles.jsp   可以由client端直接访问的路径(格式为：http：//URL/JavaWeb/otherFile.jsp)
+
+
+理解web项目中路径：{
+
+	在项目中设计过程中地址采用方式的优先级：动态获取的地址 》 相对地址 》 绝对地址
+
+	html中： url = http://localhost:8080/kasei/aa/bb.html
+	/ = http://localhost:8080/
+	./ = http://localhost:8080/kasei/aa
+	../ = http://localhost:8080/kasei
+	../../ = http://localhost:8080/
+	
+	服务器中：
+	/ = /JavaWeb/WebContent/
+}
+
+JavaWeb Scope：
+application：在整个web项目中有效，相当于全局变量
+session：仅在一次会话中有效
+request：仅在一次请求中有效
+page：仅在当前页面有效

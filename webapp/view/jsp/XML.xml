@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<title>12#230</title>
+	<person>
+		1号
+		<name>漏雨窗帘</name>
+		<age>22</age>
+		<sex>男</sex>
+		<height>165cm</height>
+		<weight>53kg</weight>
+		<hobby>enjoy anything that can be enjoy！</hobby>
+	</person>
+	<person>
+		2号
+		<name>雷妈</name>
+		<age>23</age>
+		<sex>女</sex>
+		<height>150cm</height>
+		<weight>45kg</weight>
+		<hobby>work</hobby>
+	</person>
+	<person>
+		3号
+		<name>土豪</name>
+		<age>22</age>
+		<sex>男</sex>
+		<height>172cm</height>
+		<weight>60kg</weight>
+		<hobby>LOL</hobby>
+	</person>
+	<person>
+		4号
+		<name>匹夫</name>
+		<age>23</age>
+		<sex>男</sex>
+		<height>170cm</height>
+		<weight>65kg</weight>
+		<hobby>抽烟</hobby>
+	</person>
+	<person>
+		5号
+		<name>陈泽云</name>
+		<age>22</age>
+		<sex>男</sex>
+		<height>167cm</height>
+		<weight>55kg</weight>
+		<hobby>守望先锋</hobby>
+	</person>
+
+	<!-- CDATA区:解析器会忽略 CDATA 部分中的所有内容 -->
+	<![CDATA[
+		function myFun(){
+		
+		}
+	]]>
+</root> 
+
+
