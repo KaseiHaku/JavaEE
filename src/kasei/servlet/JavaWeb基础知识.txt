@@ -34,16 +34,11 @@
 
 
 乱码问题：
-    Header -> 浏览器采用自己喜欢的编码格式对 Header 编码 -> Tomcat 采用 settings.xml 里面配置的编码方式，对 URL 解码
+    Header(URL 属于头的一部分) -> 浏览器采用自己喜欢的编码格式对 Header 编码 -> Tomcat 采用 settings.xml 里面配置的编码方式，对 URL 解码
     -> Get 方法中用 String var = request.getParameter("name").getBytes("iso-8859-1") 方式进行解码，注意这里是第二次解码了
     -> 用 String param = new String(var, "UTF8") 取参
     
     Body -> 浏览器根据 meta 头的编码格式编码 -> tomcat 不自动解码 -> request.setCharacterEncoding("字符集") 对 Body 解码 -> 取参
-    请求头乱码：
-        结论：后端无法控制浏览器使用哪种格式对请求头编码，而且不同的浏览器采用的编码格式不一样
-        过程：浏览器采用
-        
-    请求器乱码：
 
 
 
