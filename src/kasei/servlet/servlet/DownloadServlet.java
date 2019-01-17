@@ -42,6 +42,7 @@ public class DownloadServlet extends HttpServlet {
         response.reset(); // Clears any data that exists in the buffer as well as the status code and headers.
         // response.resetBuffer(); // Clears the content of the underlying buffer in the response without clearing headers or status code.
         downloadFileName = URLEncoder.encode(downloadFileName, "utf-8");
+        response.setCharacterEncoding("UTF-8");//设置响应编码 
         response.setContentType("application/octet-stream"); // 表示时 二进制流 不知道下载的文件类型
         response.addHeader("Content-Disposition","attachment;filename=" + downloadFileName); // 表示时附件，需要下载
         // ServletOutputStream sos = response.getOutputStream(); // 获取输出流
