@@ -1,18 +1,23 @@
-package kasei.web.filter;
+package kasei.javaee.filter;
 
 import java.io.IOException;
 import javax.servlet.*;
 
 public class PostCharacterEncodingFilter implements Filter {
 
-    public void init(FilterConfig fConfig) {
-        String site = fConfig.getInitParameter("Site"); // 获取初始化参数
-        System.out.println("网站名称: " + site);
+
+    private String charsetEncoding;
+
+    public void init(FilterConfig filterConfig) {
+        charsetEncoding = filterConfig.getInitParameter("charsetEncoding");
+        System.out.println("Filter init: charset ecode = " + charsetEncoding);
     }
 
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+        request.setCharacterEncoding(charsetEncoding);
+        response.setCharacterEncoding(charsetEncoding);
 
         // 输出站点名称
         System.out.println("Filter 执行！");

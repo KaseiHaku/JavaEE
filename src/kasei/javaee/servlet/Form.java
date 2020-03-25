@@ -1,4 +1,4 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 
 
-public class K02ServletForm extends HttpServlet
+public class Form extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	

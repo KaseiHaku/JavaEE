@@ -1,4 +1,4 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * 	当一个 Servlet 抛出一个异常时，
  * 	Web 容器在使用了 exception-type 元素的 web.xml 中搜索与抛出异常类型相匹配的配置。
  * */
-public class K08ServletError extends HttpServlet 
+public class Error extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

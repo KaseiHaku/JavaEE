@@ -1,4 +1,4 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
  * 2、每个Session有一个sessionID，以cookie的形式返回给浏览器端
  * 3、浏览器在访问页面是把cookie传给服务器获取SessionID
  */
-public class K06ServletSession extends HttpServlet 
+public class Session extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

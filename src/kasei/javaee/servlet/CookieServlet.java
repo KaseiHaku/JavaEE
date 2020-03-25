@@ -1,4 +1,4 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -34,7 +34,7 @@ import java.io.PrintWriter;
 可以理解为单键值对的值保存一个自定义的多键值字符串，其中的键值对分割符为&，当然可以自定义一个分隔符，
 但用asp.net获取时是以&为分割符。
  * */
-public class K05ServletCookie extends HttpServlet 
+public class CookieServlet extends HttpServlet
 {
 	/* Cookie 结构
 	 * cookie名：  name=""
@@ -61,8 +61,8 @@ public class K05ServletCookie extends HttpServlet
 		//Servlet 读取 Cookie
 		String name = null;
 		String value = null;
-		Cookie[] cookies = request.getCookies();//获取与该域相关的 Cookie 数组
-		for(Cookie cookie :cookies)
+		javax.servlet.http.Cookie[] cookies = request.getCookies();//获取与该域相关的 Cookie 数组
+		for(javax.servlet.http.Cookie cookie :cookies)
 		{
 			name = cookie.getName();//获取该cookie的名字
 			value = cookie.getValue();//获取该cookie的值

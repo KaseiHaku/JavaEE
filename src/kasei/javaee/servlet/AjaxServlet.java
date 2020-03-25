@@ -1,4 +1,4 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

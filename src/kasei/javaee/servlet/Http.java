@@ -1,4 +1,4 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -85,7 +85,7 @@ Via	告知代理客户端响应是通过哪里发送的	Via: 1.0 fred, 1.1 nowhe
 Warning	警告实体可能存在的问题	Warning: 199 Miscellaneous warning
 WWW-Authenticate	表明客户端请求实体应该使用的授权方案	WWW-Authenticate: Basic
  * */
-public class K07ServletHttp extends HttpServlet 
+public class K07ServletHttp extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
       

@@ -1,5 +1,6 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,7 @@ public class FirstServlet extends HttpServlet {
         super();
     }
 
-    public void init() throws ServletException{
+    public void init() throws ServletException {
         message = "Hello World";
         System.out.println("Servlet 类已在启动时自动加载！");
     }

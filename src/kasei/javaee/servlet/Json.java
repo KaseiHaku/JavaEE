@@ -1,6 +1,5 @@
-package kasei.web.servlet;
+package kasei.javaee.servlet;
 
-import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-public class JsonServlet extends HttpServlet {
+public class Json extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,9 +31,9 @@ public class JsonServlet extends HttpServlet {
         }
 
 
-        Gson gson = new Gson();
-        Map map = gson.fromJson(sb.toString(), Map.class); // 将 json 字符转换成对象
-        String jsonString = gson.toJson(map); // 将对象转换成 json 字符串
+        // Gson gson = new Gson();
+        // Map map = gson.fromJson(sb.toString(), Map.class); // 将 json 字符转换成对象
+        // String jsonString = gson.toJson(map); // 将对象转换成 json 字符串
 
 
 

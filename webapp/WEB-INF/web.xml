@@ -1,9 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+<!--当 metadata-complete="true" 时，禁用注解和可插性支持 -->
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         version="3.0">
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="false">
+
+    <!--######################################## web.xml introduce ##################################################-->
+    <!--
+    web.xml 文件的加载顺序：
+        Tomcat 在激活、加载、部署web应用时，会解析加载 ${CATALINA_HOME}/conf 目录下所有 web 应用通用的 web.xml，
+        然后解析加载 webapps 应用目录中的 WEB-INF/web.xml
+        所以如果 web.xml 文件不会写，可以去参考 ${CATALINA_HOME}/conf/web.xml
+
+    web.xml 中各个标签的加载顺序（与声明顺序无关）：
+        ServletContext -> context-param -> listener -> filter -> servlet
+
+    为一个 web 应用增加 Servlet 的配置方式：
+        原始方式： 编写一个类继承自 HttpServlet，将该类放在 classes 目录下的对应包结构中，修改 web.xml，在其中增加一个 Servlet 声明。
+        注解方式： 编写一个类继承自 HttpServlet，并且在该类上使用 @WebServlet 注解将该类声明为 Servlet，将该类放在 classes 目录下的对应包结构中，无需修改 web.xml 文件。
+        可插性方式： 编写一个类继承自 HttpServlet，将该类打成 JAR 包，并且在 JAR 包的 META-INF 目录下放置一个 web-fragment.xml 文件，该文件中声明了相应的 Servlet 配置。
+    -->
+
+
 
     <!--######################################## Context Parameter ##################################################-->
     <context-param>
@@ -15,45 +34,43 @@
 
     <!--######################################## Listener Settings ##################################################-->
     <listener>
-        <listener-class>kasei.genesisweb.listener.MyServletContextListener</listener-class>
+        <listener-class>kasei.javaee.listener.MyServletContextListener</listener-class>
     </listener>
 
 
 
     <!--######################################## Filter Settings ####################################################-->
+    <!--自定义编码过滤器：用于过滤 POST 请求-->
     <filter>
         <filter-name>PostCharacterEncodingFilter</filter-name>
-        <filter-class>kasei.web.filter.PostCharacterEncodingFilter</filter-class>
+        <filter-class>kasei.javaee.filter.PostCharacterEncodingFilter</filter-class>
         <init-param>
-            <param-name>encoding</param-name>
+            <param-name>charsetEncoding</param-name>
             <param-value>utf-8</param-value>
         </init-param>
     </filter>
     <filter-mapping>
         <filter-name>PostCharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>REQUEST</dispatcher><!-- 表示当前 filter 可以作用于 客户端直接过来的请求，如果不配 dispacher 标签，默认为该值 -->
+        <dispatcher>FORWARD</dispatcher><!-- 表示当前 filter 可以作用于 通过 forward 过来的请求 -->
+        <dispatcher>INCLUDE</dispatcher><!-- 表示当前 filter 可以作用于 通过 include 过来的请求 -->
+        <dispatcher>ERROR</dispatcher><!-- 表示当前 filter 可以作用于 通过  <error-page> 过来的请求 -->
     </filter-mapping>
 
-    <filter><!--自定义编码过滤器：用于过滤 get 请求-->
-        <filter-name>EncoidingFilter</filter-name>
-        <filter-class>kasei.web.filter.GetCharacterEncodingFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>EncoidingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+
 
 
     <!--######################################## Servlet Settings ###################################################-->
     <servlet>
         <servlet-name>FirstServlet</servlet-name>
-        <servlet-class>kasei.genesisweb.servlet.FirstServlet</servlet-class>   <!--Servlet的类-->
+        <servlet-class>kasei.javaee.servlet.FirstServlet</servlet-class>   <!--Servlet的类-->
         <init-param>                                     <!--初始化一个变量，可看成全局变量，可省略-->
             <param-name>param_name</param-name>              <!--变量名称-->
             <param-value>param_value</param-value>              <!--变量值-->
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported><!-- 表示该 servlet 不支持异步 -->
     </servlet>
     <servlet-mapping>
         <servlet-name>FirstServlet</servlet-name>
@@ -62,30 +79,13 @@
 
     <servlet>
         <servlet-name>AjaxServlet</servlet-name>
-        <servlet-class>kasei.genesisweb.servlet.AjaxServlet</servlet-class>
+        <servlet-class>kasei.javaee.servlet.AjaxServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AjaxServlet</servlet-name>
         <url-pattern>/servlet/AjaxServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>DownloadServlet</servlet-name>
-        <servlet-class>kasei.genesisweb.servlet.DownloadServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DownloadServlet</servlet-name>
-        <url-pattern>/servlet/DownloadServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>kasei.genesisweb.servlet.UploadServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/servlet/UploadServlet</url-pattern>
-    </servlet-mapping>
 
 
     <!--######################################## Session Settings ###################################################-->
@@ -95,7 +95,7 @@
 
     <!--######################################## Welcome Settings ###################################################-->
     <welcome-file-list>
-        <welcome-file>./view/jsp/index.jsp</welcome-file>
+        <welcome-file>./index.jsp</welcome-file>
         <welcome-file>./view/jsp/index.html</welcome-file>
     </welcome-file-list>
 

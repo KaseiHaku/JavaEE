@@ -1,0 +1,12 @@
+Tomcat 加载资源的顺序：
+    JVM 相关资源：
+        $JAVA_HOME/jre/lib/ext/*.jar
+        $CLASS_PATH/ 下的 *.jar, *.class
+
+    Tomcat 自身资源：
+        $CATALINA_HOME/lib
+        $CATALINA_BASE/
+
+    WebApp 相关的资源：
+        $CATALINA_HOME/webapps/app1/WEB-INF/lib/*.jar
+        $CATALINA_HOME/webapps/app1/WEB-INF/classes/*.class

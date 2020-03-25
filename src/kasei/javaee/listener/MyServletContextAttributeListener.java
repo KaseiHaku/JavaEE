@@ -1,4 +1,4 @@
-package kasei.web.listener;
+package kasei.javaee.listener;
 
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;

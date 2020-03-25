@@ -1,4 +1,4 @@
-package kasei.web.listener;
+package kasei.javaee.listener;
 
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionEvent;
