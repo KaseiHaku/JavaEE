@@ -20,13 +20,12 @@
         原始方式： 编写一个类继承自 HttpServlet，将该类放在 classes 目录下的对应包结构中，修改 web.xml，在其中增加一个 Servlet 声明。
         注解方式： 编写一个类继承自 HttpServlet，并且在该类上使用 @WebServlet 注解将该类声明为 Servlet，将该类放在 classes 目录下的对应包结构中，无需修改 web.xml 文件。
         可插性方式： 编写一个类继承自 HttpServlet，将该类打成 JAR 包，并且在 JAR 包的 META-INF 目录下放置一个 web-fragment.xml 文件，该文件中声明了相应的 Servlet 配置。
-
-    通过 javax.servlet.ServletContainerInitializer 这个 SPI 接口的配置方式：
-        Tomcat 容器启动时，通过 ContextConfig 监听器读取 webapps 目录下每个 web 应用的 WEB-INF/lib 目录下所有 jar 包的
-        META-INF/services/javax.servlet.ServletContainerInitializer 文件中描述的实现类的全类名，
-        通过反射，实例化这些实现类，并配置到 Context 容器中，
-        Context 容器启动时，会调用每一个实现类的 onStartUp 方法，
-        实现类上的 @HandlesTypes 注解，用于形容传入到 onStartUp 方法第一个参数的 java.lang.Class 实例有哪些
+        SPI 方式：
+            Tomcat 容器启动时，通过 ContextConfig 监听器读取 webapps 目录下每个 web 应用的 WEB-INF/lib 目录下所有 jar 包的
+            META-INF/services/javax.servlet.ServletContainerInitializer 文件中描述的实现类的全类名，
+            通过反射，实例化这些实现类，并配置到 Context 容器中，
+            Context 容器启动时，会调用每一个实现类的 onStartUp 方法，
+            实现类上的 @HandlesTypes 注解，用于形容传入到 onStartUp 方法第一个参数的 java.lang.Class 实例有哪些
     -->
 
 
